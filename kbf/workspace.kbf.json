@@ -1,0 +1,162 @@
+{
+ "id": "ws_f4020df7",
+ "name": "Latency comparison (starter)",
+ "mode": "cpp",
+ "tiles": {
+  "stream": {
+   "id": "stream",
+   "type": "data_stream",
+   "x": 40,
+   "y": 240,
+   "label": "Axon feed",
+   "params": {
+    "rate_bps": 2660000,
+    "packet_bytes": 256,
+    "protocol": "axon",
+    "count": 5000,
+    "jitter_pct": 5
+   },
+   "code": {}
+  },
+  "nic": {
+   "id": "nic",
+   "type": "nic",
+   "x": 400,
+   "y": 240,
+   "label": "Network Card",
+   "params": {
+    "ingress_ns": 430
+   },
+   "code": {}
+  },
+  "kernel": {
+   "id": "kernel",
+   "type": "kernel_path",
+   "x": 760,
+   "y": 40,
+   "label": "Kernel / CPU Path",
+   "params": {
+    "jitter_ns": 1080,
+    "syscall_copy_ns": 5900
+   },
+   "code": {}
+  },
+  "bypass": {
+   "id": "bypass",
+   "type": "kernel_bypass",
+   "x": 760,
+   "y": 460,
+   "label": "Kernel Bypass",
+   "params": {
+    "poll_interval_ns": 3920,
+    "dma_ns": 1590
+   },
+   "code": {}
+  },
+  "snippet": {
+   "id": "snippet",
+   "type": "snippet",
+   "x": 1120,
+   "y": 460,
+   "label": "Snippet Definer",
+   "params": {
+    "length": 64,
+    "max_packets": 2000,
+    "max_bytes": 0
+   },
+   "code": {}
+  },
+  "stamp": {
+   "id": "stamp",
+   "type": "timestamp",
+   "x": 1480,
+   "y": 460,
+   "label": "Timestamp",
+   "params": {
+    "name": "after_snippet"
+   },
+   "code": {}
+  },
+  "proc": {
+   "id": "proc",
+   "type": "processor",
+   "x": 1840,
+   "y": 460,
+   "label": "Processor",
+   "params": {},
+   "code": {}
+  },
+  "meter": {
+   "id": "meter",
+   "type": "latency_meter",
+   "x": 2200,
+   "y": 460,
+   "label": "Latency Meter",
+   "params": {
+    "name": "before_memory",
+    "report_every": 1000
+   },
+   "code": {}
+  },
+  "memory": {
+   "id": "memory",
+   "type": "memory",
+   "x": 2560,
+   "y": 240,
+   "label": "Memory Store",
+   "params": {
+    "capacity_kb": 2048
+   },
+   "code": {}
+  }
+ },
+ "wires": [
+  {
+   "id": "w0",
+   "from": "stream",
+   "to": "nic"
+  },
+  {
+   "id": "w1",
+   "from": "nic",
+   "to": "kernel"
+  },
+  {
+   "id": "w2",
+   "from": "nic",
+   "to": "bypass"
+  },
+  {
+   "id": "w3",
+   "from": "kernel",
+   "to": "memory"
+  },
+  {
+   "id": "w4",
+   "from": "bypass",
+   "to": "snippet"
+  },
+  {
+   "id": "w5",
+   "from": "snippet",
+   "to": "stamp"
+  },
+  {
+   "id": "w6",
+   "from": "stamp",
+   "to": "proc"
+  },
+  {
+   "id": "w7",
+   "from": "proc",
+   "to": "meter"
+  },
+  {
+   "id": "w8",
+   "from": "meter",
+   "to": "memory"
+  }
+ ],
+ "version": 4,
+ "saved_from": "KBF Studio"
+}

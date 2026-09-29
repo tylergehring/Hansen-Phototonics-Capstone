@@ -1,1 +1,3 @@
-init
+# Hansen Photonics Capstone Value Proposition
+
+High-capacity fiber links are valuable only when receiving computers can keep up with the data they deliver. Hansen Photonics' Axon technology is designed to increase link capacity, but conventional networking can add processing overhead between a network card and the application that needs the data. Our capstone team will build a prototype packet filter that explores a lower-overhead receive path and compare it with the conventional approach using a repeatable data stream. By measuring throughput, packet loss, latency, and CPU use, we will determine how the prototype performs and where it may help. The project will produce a working demonstration and evidence to guide future efforts to move high-rate data efficiently into applications for science and other demanding uses.
